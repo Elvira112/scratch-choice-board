@@ -1,194 +1,196 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1894.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'Geeza Pro'}
-    span.s1 {font: 12.0px 'Geeza Pro'}
-    span.s2 {font: 12.0px Helvetica}
-    span.s3 {font: 12.0px 'Apple Color Emoji'}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة اختيار في برمجة سكراتش</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f7fbff;
+        }
+        .instructions {
+            margin: 20px auto;
+            text-align: center;
+            padding: 20px;
+            max-width: 900px;
+            background-color: #e8f8f5;
+            border-radius: 20px;
+            border: 3px solid #1abc9c;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .instructions h2 {
+            margin-bottom: 15px;
+            font-size: 28px;
+            color: #16a085;
+            text-align: center;
+        }
+        .instructions p {
+            font-size: 20px;
+            color: #34495e;
+            line-height: 1.6;
+        }
+        .board-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 900px;
+        }
+        .board-item {
+            background-color: #e6f7ff;
+            border: 3px solid #5dade2;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            position: relative;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .board-item.completed {
+            background-color: #d4edda;
+            border-color: #28a745;
+            box-shadow: 0 6px 12px rgba(40, 167, 69, 0.5);
+        }
+        .board-item:hover {
+            transform: scale(1.05);
+            background-color: #d9f2ff;
+        }
+        .board-item h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+            color: #2c3e50;
+        }
+        .board-item p {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        .board-item input[type="file"] {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .board-item .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: #1abc9c;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 16px;
+            color: #2c3e50;
+            background-color: #f7fbff;
+            padding: 10px;
+            border-top: 2px solid #1abc9c;
+            width: 100%;
+        }
+        .footer strong {
+            color: #16a085;
+        }
+    </style>
+    <script>
+        let completedTasks = [];
+
+        function completeTask(taskIndex, element) {
+            if (!completedTasks.includes(taskIndex)) {
+                completedTasks.push(taskIndex);
+                element.closest('.board-item').classList.add('completed');
+                alert(`🎉 أحسنتِ! لقد أنجزتِ المهمة: ${taskIndex + 1}. سيتم مناقشة الإجابات لاحقًا.`);
+            }
+
+            checkForCompletion();
+        }
+
+        function checkForCompletion() {
+            const winningCombinations = [
+                [0, 1, 2], // الصف الأول أفقي
+                [3, 4, 5], // الصف الثاني أفقي
+                [6, 7, 8], // الصف الثالث أفقي
+                [0, 3, 6], // العمود الأول رأسي
+                [1, 4, 7], // العمود الثاني رأسي
+                [2, 5, 8], // العمود الثالث رأسي
+                [0, 4, 8], // قطري من اليسار إلى اليمين
+                [2, 4, 6]  // قطري من اليمين إلى اليسار
+            ];
+
+            for (let combination of winningCombinations) {
+                if (combination.every(index => completedTasks.includes(index))) {
+                    alert("🎯 تهانينا! لقد أكملتِ 3 مهام متصلة بنجاح! رائع جدًا! 🎉");
+                    return;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;<span class="s1">لوحة</span> <span class="s1">اختيار</span> <span class="s1">في</span> <span class="s1">برمجة</span> <span class="s1">سكراتش</span>&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Arial', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef5ff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-container {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(3, 1fr);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 90%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 900px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #4e89ff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s, box-shadow 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.1);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item h3 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 20px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #0047ab;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item p {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 16px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item a {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 12px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4e89ff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 14px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item a:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #3570d4;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.instructions {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 20px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 900px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border: 3px solid #4e89ff;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.instructions h2 {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 26px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #0047ab;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.instructions p {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 18px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.icon {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>right: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #4e89ff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item .icon {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>top: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-size: 24px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #4e89ff;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.board-item img {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>max-width: 80%;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>margin: 10px auto;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="instructions"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">        </span>&lt;h2&gt;</span>لوحة<span class="s2"> </span>اختيار<span class="s2"> </span>في<span class="s2"> </span>برمجة<span class="s2"> </span>سكراتش<span class="s2">&lt;/h2&gt;</span></p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">        </span>&lt;p&gt;</span>اختاري<span class="s2"> 3 </span>مهام<span class="s2"> </span>متصلة<span class="s2"> (</span>أفقيًا،<span class="s2"> </span>رأسيًا،<span class="s2"> </span>أو<span class="s2"> </span>قطريًا<span class="s2">) </span>لتنفيذها<span class="s2"> </span>خلال<span class="s2"> </span>الحصة<span class="s2">. </span>استمتعي<span class="s2"> </span>بالتعلم<span class="s2"> </span>الإبداعي<span class="s2">!&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="icon"&gt;<span class="s3">🎮</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="board-container"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">📺</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;1. <span class="s1">مشاهدة</span> <span class="s1">فيديو</span> Scratch&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Scratch+Video" alt="Scratch Video"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>شاهدي<span class="s2"> </span>الفيديو<span class="s2"> </span>التعليمي<span class="s2"> </span>على<span class="s2"> </span>الرابط<span class="s2"> </span>التالي،<span class="s2"> </span>ثم<span class="s2"> </span>جربي<span class="s2"> </span>تغيير<span class="s2"> </span>لون<span class="s2"> </span>شخصية<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="https://youtu.be/YqWQcIwJnFU?si=XEPWkng3TrnnAm8r" target="_blank"&gt;<span class="s1">شاهد</span> <span class="s1">الفيديو</span> <span class="s1">الآن</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">⚖️</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;2. <span class="s1">مقارنة</span> <span class="s1">بين</span> <span class="s1">لعبتين</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Compare+Games" alt="Compare Games"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>قارني<span class="s2"> </span>بين<span class="s2"> </span>لعبتين<span class="s2"> </span>مختلفتين<span class="s2"> </span>باستخدام<span class="s2"> </span>جدول<span class="s2"> </span>المقارنة<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="https://scratch.mit.edu/projects/991707453" target="_blank"&gt;<span class="s1">اللعبة</span> <span class="s1">الأولى</span>&lt;/a&gt; |</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="https://scratch.mit.edu/projects/991498845" target="_blank"&gt;<span class="s1">اللعبة</span> <span class="s1">الثانية</span>&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">🎮</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;3. <span class="s1">تصميم</span> <span class="s1">لعبة</span> <span class="s1">بسيطة</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Game+Design" alt="Game Design"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>صممي<span class="s2"> </span>لعبة<span class="s2"> </span>تحتوي<span class="s2"> </span>على<span class="s2"> </span>شخصية<span class="s2"> </span>تتحرك<span class="s2"> </span>باستخدام<span class="s2"> </span>مفاتيح<span class="s2"> </span>الأسهم<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">📝</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;4. <span class="s1">كتابة</span> <span class="s1">تقرير</span> <span class="s1">تأملي</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Reflection+Report" alt="Reflection Report"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>اكتبي<span class="s2"> </span>تقريرًا<span class="s2"> </span>عن<span class="s2"> </span>تجربتك<span class="s2"> </span>في<span class="s2"> </span>تصميم<span class="s2"> </span>اللعبة<span class="s2">: </span>ما<span class="s2"> </span>تعلمته<span class="s2"> </span>والتحديات<span class="s2"> </span>التي<span class="s2"> </span>واجهتها<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">📊</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;5. <span class="s1">إنشاء</span> <span class="s1">لعبة</span> <span class="s1">رياضية</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Math+Game" alt="Math Game"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>صممي<span class="s2"> </span>لعبة<span class="s2"> </span>لتعليم<span class="s2"> </span>الجمع<span class="s2"> </span>أو<span class="s2"> </span>الطرح<span class="s2"> </span>للأطفال<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">🔍</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;6. <span class="s1">تحليل</span> <span class="s1">تحديات</span> <span class="s1">البرمجة</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Debugging" alt="Debugging Challenges"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>حللي<span class="s2"> </span>التحديات<span class="s2"> </span>التي<span class="s2"> </span>واجهتها<span class="s2"> </span>أثناء<span class="s2"> </span>برمجة<span class="s2"> </span>لعبة<span class="s2"> </span>معقدة<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">🗺️</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;7. <span class="s1">تصميم</span> <span class="s1">خريطة</span> <span class="s1">للمشروع</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Project+Map" alt="Project Map"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>ارسمي<span class="s2"> </span>خريطة<span class="s2"> </span>ذهنية<span class="s2"> </span>لفكرة<span class="s2"> </span>مشروع<span class="s2"> </span>لعبتك<span class="s2"> </span>الجديدة<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">💡</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;8. <span class="s1">عرض</span> <span class="s1">فكرة</span> <span class="s1">تعليمية</span> <span class="s1">جديدة</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=New+Idea" alt="New Idea"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>قدمي<span class="s2"> </span>فكرة<span class="s2"> </span>جديدة<span class="s2"> </span>لتصميم<span class="s2"> </span>لعبة<span class="s2"> </span>تعليمية<span class="s2"> </span>مبتكرة<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="board-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="icon"&gt;<span class="s3">🖋️</span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3&gt;9. <span class="s1">كتابة</span> <span class="s1">خطوات</span> <span class="s1">المشروع</span>&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;img src="https://via.placeholder.com/150?text=Project+Steps" alt="Project Steps"&gt;</p>
-<p class="p3"><span class="s2"><span class="Apple-converted-space">            </span>&lt;p&gt;</span>اكتبي<span class="s2"> </span>خطوات<span class="s2"> </span>واضحة<span class="s2"> </span>لتنفيذ<span class="s2"> </span>لعبتك<span class="s2"> </span>البرمجية<span class="s2">.&lt;/p&gt;</span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
-</body>
-</html>
+
+    <div class="instructions">
+        <h2 style="text-align: center;">لوحة اختيار في برمجة سكراتش</h2>
+        <p>مرحبًا بكن يا نجمات البرمجة! 🌟<br>أمامكن مجموعة من الأنشطة الإبداعية لاكتشاف مهاراتكن في برمجة <strong>سكراتش</strong>. <strong>اختاري أي 3 مهام متصلة</strong> (أفقيًا، رأسيًا، أو قطريًا) وارفقي الملفات لكل نشاط لإكماله بنجاح! 🎯</p>
+    </div>
+
+    <div class="board-container">
+        <div class="board-item">
+            <div class="icon">🎥</div>
+            <h3>1. مشاهدة فيديو سكراتش</h3>
+            <p>شاهدي الفيديو وأرفقي لقطة شاشة من الفيديو.</p>
+            <a href="https://youtu.be/YqWQcIwJnFU?si=XEPWkng3TrnnAm8r" target="_blank">شاهد الفيديو الآن</a>
+            <input type="file" accept="image/*" onchange="completeTask(0, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">🕹️</div>
+            <h3>2. مقارنة بين لعبتين</h3>
+            <p>قارني بين اللعبتين وأرفقي ملخص المقارنة.</p>
+            <a href="https://scratch.mit.edu/projects/991707453" target="_blank">اللعبة الأولى</a> |
+            <a href="https://scratch.mit.edu/projects/991498845" target="_blank">اللعبة الثانية</a>
+            <input type="file" accept=".doc,.pdf" onchange="completeTask(1, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">💻</div>
+            <h3>3. تصميم لعبة بسيطة</h3>
+            <p>صممي لعبة وأرفقي رابط اللعبة أو المشروع.</p>
+            <input type="file" accept=".txt,.doc,.pdf" onchange="completeTask(2, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">📝</div>
+            <h3>4. كتابة تقرير تأملي</h3>
+            <p>اكتبي تقريرًا عن تجربتك وأرفقيه كملف PDF.</p>
+            <input type="file" accept=".pdf" onchange="completeTask(3, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">➕</div>
+            <h3>5. إنشاء لعبة رياضية</h3>
+            <p>صممي لعبة رياضية وأرفقي فيديو يوضح طريقة عملها.</p>
+            <input type="file" accept="video/*" onchange="completeTask(4, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">🔍</div>
+            <h3>6. تحليل تحديات البرمجة</h3>
+            <p>اكتبي عن تحديات البرمجة التي واجهتك وأرفقيها كملف DOC.</p>
+            <input type="file" accept=".doc,.pdf" onchange="completeTask(5, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">🗺️</div>
+            <h3>7. تصميم خريطة للمشروع</h3>
+            <p>ارسمي خريطة ذهنية للمشروع وأرفقيها كصورة.</p>
+            <input type="file" accept="image/*" onchange="completeTask(6, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">💡</div>
+            <h3>8. عرض فكرة تعليمية جديدة</h3>
+            <p>قدمي فكرة جديدة وأرفقي العرض التقديمي.</p>
+            <input type="file" accept=".ppt,.pptx" onchange="completeTask(7, this)">
+        </div>
+        <div class="board-item">
+            <div class="icon">✍️</div>
+            <h3>9. كتابة خطوات المشروع</h3>
+            <p
